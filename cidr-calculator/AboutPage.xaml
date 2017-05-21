@@ -1,0 +1,106 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="cidr_calculator.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    toolkit:TiltEffect.IsTiltEnabled="True" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <controls:Pivot Title="CIDR CALCULATOR">
+            <!--Pivot item ABOUT -->
+            <controls:PivotItem Header="about">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Height="Auto" Width="Auto" Text="Application Title" VerticalAlignment="Top"  HorizontalAlignment="Stretch" FontSize="26" Name="txtAppName" />
+                            <TextBlock Height="30" HorizontalAlignment="Stretch" Name="txtVersion" Text="Version" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" FontSize="22.667" />
+                            <TextBlock Height="Auto" Width="Auto" Text="Description" VerticalAlignment="Top"  HorizontalAlignment="Stretch"  Name="txtDescription"  Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap" FontSize="22.667" Margin="0,10,0,0" />
+                            <TextBlock Height="Auto" FontSize="26" HorizontalAlignment="Stretch" Name="txtSupport" Text="For feedback and support contact" VerticalAlignment="Top" Margin="0,10,0,0" />
+                            <HyperlinkButton Content="cederstrom@acm.org" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="btnContact" VerticalAlignment="Top" Width="Auto" HorizontalContentAlignment="Left" Foreground="{StaticResource PhoneAccentBrush}" Click="btnContact_Click" />
+                            <TextBlock  Height="Auto"  FontSize="26" HorizontalAlignment="Stretch" Margin="0,10,0,0" Name="textBlock1" Text="Review CIDR Calculator" VerticalAlignment="Top" />
+                            <HyperlinkButton Content="Rate and review" Height="30" HorizontalAlignment="Stretch" Margin="0" Name="btnReview" VerticalAlignment="Top" Width="Auto" HorizontalContentAlignment="Left" Foreground="{StaticResource PhoneAccentBrush}" Click="btnReview_Click" />
+                            <TextBlock Height="30" FontSize="26" HorizontalAlignment="Stretch" Margin="0,10,0,0" Name="textBlock2" Text="More apps" VerticalAlignment="Top" />
+                            <HyperlinkButton Content="Marketplace" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="btnMarketplace" VerticalAlignment="Top" Width="Auto" HorizontalContentAlignment="Left" Foreground="{StaticResource PhoneAccentBrush}" Click="btnMarketplace_Click" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </controls:PivotItem>
+            <!--Pivot item HELP-->
+            <controls:PivotItem Header="help">
+                <Grid>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Name="txtHelp" Text="Check " FontSize="22.667" Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap" />
+
+                            <TextBlock Text="Directions:"  FontSize="26" TextWrapping="Wrap" Margin="0,10,0,0" />
+                            <TextBlock Name="txtDirections" Text="Enter an IP address and select the type of option to mask it with. Results will be displayed in IPv4 and binary." FontSize="22.667" Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </controls:PivotItem>
+            <!--Pivot item HISTORY-->
+            <controls:PivotItem Header="history">
+                <Grid>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Text="version 1.0" FontSize="26" />
+                            <TextBlock Text="Inital release"  FontSize="22.667" Foreground="{StaticResource PhoneAccentBrush}"/>
+                        </StackPanel>
+
+                    </ScrollViewer>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+        <my:AdControl AdUnitId="11192660" ApplicationId="e34b248b-00d7-4810-bec0-3223f8b524e4" Height="80" Name="adControl1" Width="480" VerticalAlignment="Bottom" />
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

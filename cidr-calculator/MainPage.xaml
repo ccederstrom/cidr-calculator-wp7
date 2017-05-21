@@ -1,0 +1,195 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="cidr_calculator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <DataTemplate x:Name="PickerItemTemplateNotation">
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Notation}" Margin="0 0 0 0" FontSize="28" TextAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Name="PickerFullModeItemTemplateNotation">
+                <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                    <TextBlock Text="{Binding Notation}" Margin="16 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Name="PickerItemTemplateDecimal">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Decimal}" Margin="0 0 0 0" FontSize="28"  TextAlignment="Center" HorizontalAlignment="Center" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Name="PickerFullModeItemTemplateDecimal">
+                <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                    <TextBlock Text="{Binding Decimal}" Margin="16 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Name="PickerItemTemplateBinary">
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Binary32}" Margin="0 0 0 0" FontSize="28" TextAlignment="Center"/>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Name="PickerFullModeItemTemplateBinary">
+                <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                    <TextBlock Text="{Binding Binary32}" Margin="16 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                </StackPanel>
+            </DataTemplate>
+
+
+            <DataTemplate x:Name="PickerItemTemplateMaximumSubnets">
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding MaximumSubnets}" Margin="0 0 0 0" FontSize="28" TextAlignment="Center"/>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Name="PickerFullModeItemTemplateMaximumSubnets">
+                <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                    <TextBlock Text="{Binding MaximumSubnets}" Margin="16 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                </StackPanel>
+            </DataTemplate>
+
+
+            <DataTemplate x:Name="PickerItemTemplateMaximumAddresses">
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding MaximumAddresses}" Margin="0 0 0 0" FontSize="28" TextAlignment="Center" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Name="PickerFullModeItemTemplateMaximumAddresses">
+                <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
+                    <TextBlock Text="{Binding MaximumAddresses}" Margin="16 0 0 0" FontSize="43" FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                </StackPanel>
+            </DataTemplate>
+
+        </Grid.Resources>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,22">
+            <TextBlock x:Name="ApplicationTitle"  Foreground="{StaticResource PhoneAccentBrush}" Text="CIDR CALCULATOR" Style="{StaticResource PhoneTextNormalStyle}" FontSize="29"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            
+            <ScrollViewer>
+                <StackPanel Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="stackPanel1" VerticalAlignment="Stretch" Width="Auto">
+                   
+                    <StackPanel Orientation="Horizontal">
+                       <TextBox InputScope="Digits" Height="Auto" Name="tbIPAddress" Text="192.168.1.1" Width="275" FontSize="28" VerticalAlignment="Bottom" TextAlignment="Center" TextChanged="tbIPAddress_TextChanged" />
+                        <toolkit:ListPicker Name="lpNotation" ItemTemplate="{StaticResource PickerItemTemplateNotation}" FullModeItemTemplate="{StaticResource PickerFullModeItemTemplateNotation}" FullModeHeader="CIDR Notation" Width="100" Header="mask bits" SelectionChanged="lpNotation_SelectionChanged" Tap="lpNotation_Tap" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <toolkit:ListPicker Name="lpDecimal" ItemTemplate="{StaticResource PickerItemTemplateDecimal}"  FullModeItemTemplate="{StaticResource PickerFullModeItemTemplateDecimal}" FullModeHeader="CIDR Netmask"  Width="250" Header="cidr netmask"  SelectionChanged="lpDecimal_SelectionChanged" FontSize="28" Tap="lpDecimal_Tap" />
+                    </StackPanel>
+                    <!--<toolkit:ListPicker Name="lpBinary" ItemTemplate="{StaticResource PickerItemTemplateBinary}"  FullModeItemTemplate="{StaticResource PickerFullModeItemTemplateBinary}" FullModeHeader="Binary Netmask"   Tap="lpBinary_Tap" Header="CIDR Netmask" />-->
+
+                    <StackPanel Orientation="Horizontal">
+                      <toolkit:ListPicker Name="lpMaximumSubnets" ItemTemplate="{StaticResource PickerItemTemplateMaximumSubnets}"  FullModeItemTemplate="{StaticResource PickerFullModeItemTemplateMaximumSubnets}" FullModeHeader="Maximum Subnets" Width="200" Header="maximum subnets" SelectionChanged="lpMaximumSubnets_SelectionChanged" FontSize="28" HorizontalContentAlignment="Left" Tap="lpMaximumSubnets_Tap" />
+                      <toolkit:ListPicker Name="lpMaximumAddresses" ItemTemplate="{StaticResource PickerItemTemplateMaximumAddresses}"  FullModeItemTemplate="{StaticResource PickerFullModeItemTemplateMaximumAddresses}" FullModeHeader="Maximum Addresses" Width="200" Header="maximum addresses" SelectionChanged="lpMaximumAddresses_SelectionChanged" FontSize="28" HorizontalContentAlignment="Left" Tap="lpMaximumAddresses_Tap" />
+                    </StackPanel>
+                    <TextBlock Height="Auto" Name="textBlock1" Foreground="{StaticResource PhoneAccentBrush}" Text="network details" FontSize="28" />
+                    <!--<TextBlock Height="30" Name="tbNetmask" Text="Netmask" />-->
+                    <TextBlock Height="30" Text="wildcard mask" Margin="10,0,0,0" />
+                    <TextBlock Height="30" Name="tbWildcard" Text="Wildcard mask" Margin="10,0,0,10" FontFamily="Courier New" />
+                    <TextBlock Height="30" Text="network id" Margin="10,0,0,0" />
+                    <TextBlock Height="30" Name="tbNetworkAddress" Text="Network Address" Margin="10,0,0,10" FontFamily="Courier New" />
+                    <TextBlock Height="30"  Text="broadcast" Margin="10,0,0,0" />
+                    <TextBlock Height="30" Name="tbBroadcastAddress" Text="Broadcast Address" Margin="10,0,0,10" FontFamily="Courier New" />
+
+                    <TextBlock Height="30" Text="range" Margin="10,0,0,0" />
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Height="30" FontFamily="Courier New" Name="tbFirstHost" Text="First host" Margin="10,0,0,0" />
+                        <TextBlock Height="30" FontFamily="Courier New" Text=" - " />
+                        <TextBlock Height="30" FontFamily="Courier New" Name="tbLastHost" Text="Last host" />
+                    </StackPanel>
+                    <!--<TextBlock Height="30" Name="tbHostCount" Text="Total host count" />-->
+                    <!--<TextBlock Height="Auto" Name="textBlock6" Text="Address Range" FontSize="28" />
+                    <TextBlock Height="30" Name="tbMaximumSubnets" Text="Maximum Subnets" />
+                    <TextBlock Height="30" Name="tbMaximumAddresses" Text="Maximum Addresses" />-->
+
+                    <TextBlock Height="Auto" Name="textBlock10" Text="binary" Foreground="{StaticResource PhoneAccentBrush}"  FontSize="28" Margin="0,10,0,0" />
+                    <TextBlock Height="30"  Text="ip" Margin="10,0,0,0"  />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryIP" Text="IP"  Margin="10,0,0,10" />
+                    <TextBlock Height="30"  Text="netmask"  Margin="10,0,0,0" />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryNetmask" Text="Netmask" Margin="10,0,0,10"  />
+                    <TextBlock Height="30" Text="wildcard" Margin="10,0,0,0"  />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryWildcard" Text="Wildcard"  Margin="10,0,0,10" />
+
+                    <TextBlock Height="30" Text="broadcast" Margin="10,0,0,0"  />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryBroadcast" Text="Broadcast" Margin="10,0,0,10"  />
+
+                    <TextBlock Height="30"  Text="range" Margin="10,0,0,0"  />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryFirstHost" Text="Range" Margin="10,0,0,0"  />
+                    <TextBlock Height="30" Text="  to " Margin="10,0,0,0" />
+                    <TextBlock Height="30" FontFamily="Courier New" Name="tbBinaryLastHost" Text="last" Margin="10,0,0,0"  />
+
+
+
+
+                    <TextBlock Height="Auto" Name="textBlock11" Text="Phone" FontSize="32" Visibility="Collapsed" />
+                    <TextBlock Height="30" Name="tbCellularMobileOperator" Text="CellularMobileOperator" Visibility="Collapsed"  />
+                    <TextBlock Height="30" Name="tbIsCellularDataEnabled" Text="IsCellularDataEnabled" Visibility="Collapsed"  />
+                    <TextBlock Height="30" Name="tbIsCellularDataRoamingEnabled" Text="IsCellularDataRoamingEnabled" Visibility="Collapsed"  />
+                    <TextBlock Height="30" Name="tbIsNetworkAvailable" Text="IsNetworkAvailable" Visibility="Collapsed"  />
+                    <TextBlock Height="30" Name="tbIsWifiEnabled" Text="IsWifiEnabled" Visibility="Collapsed"  />
+                </StackPanel>
+            </ScrollViewer>
+                
+        </Grid>
+        <my:AdControl AdUnitId="11192660" ApplicationId="e34b248b-00d7-4810-bec0-3223f8b524e4" Height="80" HorizontalAlignment="Center" Margin="0" Name="adControl1" VerticalAlignment="Top" Width="480" />
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" Mode="Minimized" IsMenuEnabled="True">
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>-->
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>-->
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click"/>
+                <!--<shell:ApplicationBarMenuItem Text="MenuItem 2"/>-->
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
